@@ -1,5 +1,5 @@
 const Admin = require("../models/admin.models");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config(); 
 exports.register = async (req, res) => {
