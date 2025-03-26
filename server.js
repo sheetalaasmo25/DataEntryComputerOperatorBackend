@@ -25,7 +25,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// Define routes
+// Define route
 app.use("/api/admin", adminRoutes);
 app.use("/api/user", userRoutes);
 
