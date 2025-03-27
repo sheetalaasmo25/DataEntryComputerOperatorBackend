@@ -193,3 +193,35 @@ exports.getMyTasks = async (req, res) => {
         .json({ message: "Server error occurred. Please try again later." });
     }
   };
+
+
+  //user getown task by id
+  exports.getTaskById = async (req, res) => {
+    try {
+        const { id } = req.params; // Get task ID from request parameters
+        const userId = req.user.id; // Get logged-in user ID
+
+        if (!id) {
+            return res.status(400).json({ message: "Task ID is required" });
+        }
+
+        // Find the task by ID and ensure it belongs to the logged-in user
+        const task = await Task.findOne({ _id: id, userId })
+            .select("startDateTime endDateTime count link createdAt updatedAt")
+            .lean();
+
+        if (!task) {
+            return res.status(404).json({ message: "Task not found" });
+        }
+
+        res.status(200).json({
+            message: "Task retrieved successfully",
+            task,
+        });
+    } catch (error) {
+        console.error("Error fetching task by ID:", error.message);
+        res.status(500).json({
+            message: "Server error occurred. Please try again later.",
+        });
+    }
+};
