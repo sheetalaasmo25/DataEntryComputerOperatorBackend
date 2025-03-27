@@ -12,17 +12,17 @@ exports.addUserTask = async (req, res) => {
         }
 
         // Check if user already has a task entry
-        const existingTask = await UserAddTask.findOne({ userId });
-        if (existingTask) {
-            return res.status(400).json({ message: "User task data already exists" });
-        }
+        // const existingTask = await UserAddTask.findOne({ userId });
+        // if (existingTask) {
+        //     return res.status(400).json({ message: "User task data already exists" });
+        // }
 
         // Create a new task entry with user ID
         const newUserTask = new UserAddTask({
             userId,
             ...req.body
         });
-
+console.log(req.body,"req.body")
         await newUserTask.save();
 
         res.status(201).json({ message: "User task data added successfully", data: newUserTask });
@@ -108,5 +108,27 @@ exports.getUserTaskSummary = async (req, res) => {
         console.error("Error fetching user task summary:", error.message);  
         res.status(500).json({ message: "Server error occurred. Please try again later." });  
     }  
+};
+
+
+exports.deleteUserTask = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!id) {
+            return res.status(400).json({ message: "Task ID is required" });
+        }
+
+        const deletedTask = await UserAddTask.findByIdAndDelete(id);
+
+        if (!deletedTask) {
+            return res.status(404).json({ message: "Task not found" });
+        }
+
+        res.status(200).json({ message: "Task deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting user task:", error);
+        res.status(500).json({ message: "Internal Server Error", error: error.message });
+    }
 };
 

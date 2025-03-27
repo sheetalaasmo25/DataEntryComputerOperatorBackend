@@ -23,4 +23,5 @@ router.put("/update-assign-task/:id", taskController.updateTaskById);
 router.delete("/delete-assign-task/:id", taskController.deleteTaskById);
 //getby user id
 router.get("/getbyid-task/:userId", userAddTaskcontroller.getUserTasks);
+router.delete("/deleteuserstask/:id", userAddTaskcontroller.deleteUserTask);
 module.exports = router;
