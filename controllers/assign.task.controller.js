@@ -103,6 +103,8 @@ exports.getTaskById = async (req, res) => {
         res.status(500).json({ message: "Server error occurred. Please try again later." });
     }
 };
+
+
 exports.updateTaskById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -196,7 +198,7 @@ exports.getMyTasks = async (req, res) => {
 
 
   //user getown task by id
-  exports.getTaskById = async (req, res) => {
+  exports.getTaskByIdUser = async (req, res) => {
     try {
         const { id } = req.params; // Get task ID from request parameters
         const userId = req.user.id; // Get logged-in user ID

@@ -14,7 +14,7 @@ router.get("/getprofile", userAddTaskController.getUserTaskSummary);
 
 //user getall own assign task
 router.get("/getallown-task", taskController.getMyTasks);
-router.get("/getallownbyid-task/:id", taskController.getTaskById);
+router.get("/getallownbyid-task/:id", taskController.getTaskByIdUser);
 
 router.post("/add-task", userAddTaskController.addUserTask);
 
