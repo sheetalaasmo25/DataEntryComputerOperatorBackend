@@ -19,7 +19,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 const corsOptions = {
-    origin: "*", // Allow all origins (you can restrict it later)
+    origin:"https://hrinfohub.com/",
+    // origin: "*", // Allow all origins (you can restrict it later)
     methods: ["GET", "PUT", "PATCH", "DELETE", "POST"], // Fixed spelling
     allowedHeaders: ["Content-Type", "Authorization"], // Fixed `Content-type` to `Content-Type`
 };
